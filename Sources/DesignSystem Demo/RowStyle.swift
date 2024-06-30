@@ -23,7 +23,7 @@ struct CustomRowStyle: RowStyle {
 private struct RowDetailStyle: DetailStyle {
 
     func makeBody(configuration: Configuration) -> some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 4) {
             configuration.primary
                 .font(.headline)
             configuration.secondary
