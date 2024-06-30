@@ -17,5 +17,12 @@ let package = Package(
     ],
     targets: [
         .target(name: "DesignSystem"),
+
+        .executableTarget(
+            name: "DesignSystem Demo",
+            dependencies: [
+                "DesignSystem"
+            ]
+        ),
     ]
 )
