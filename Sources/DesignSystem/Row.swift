@@ -27,6 +27,28 @@ public struct Row<Content: View, Leading: View, Trailing: View>: View {
     }
 }
 
+extension Row {
+
+    public init<Primary, Secondary>(
+        @ViewBuilder primary: () -> Primary,
+        @ViewBuilder secondary: () -> Secondary,
+        @ViewBuilder leading: () -> Leading,
+        @ViewBuilder trailing: () -> Trailing
+    ) where Content == Detail<Primary, Secondary, EmptyView> {
+        self.init {
+            Detail {
+                primary()
+            } secondary: {
+                secondary()
+            }
+        } leading: {
+            leading()
+        } trailing: {
+            trailing()
+        }
+    }
+}
+
 // MARK: - Style
 
 public protocol RowStyle: DynamicProperty {

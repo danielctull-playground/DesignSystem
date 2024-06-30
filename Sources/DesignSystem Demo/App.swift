@@ -24,6 +24,16 @@ struct Components: View {
             } trailing: {
                 Image(systemName: "chevron.right")
             }
+
+            Row {
+                Text("Title")
+            } secondary: {
+                Text("Subtitle")
+            } leading: {
+                Image(systemName: "info.circle")
+            } trailing: {
+                Image(systemName: "chevron.right")
+            }
         }
     }
 }

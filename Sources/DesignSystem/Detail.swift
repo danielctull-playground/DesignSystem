@@ -27,6 +27,19 @@ public struct Detail<Primary: View, Secondary: View, Tertiary: View>: View {
     }
 }
 
+extension Detail {
+
+    public init(
+        @ViewBuilder primary: () -> Primary,
+        @ViewBuilder secondary: () -> Secondary
+    ) where Tertiary == EmptyView {
+        self.init(
+            primary: primary,
+            secondary: secondary,
+            tertiary: EmptyView.init)
+    }
+}
+
 // MARK: - Style
 
 public protocol DetailStyle: DynamicProperty {
