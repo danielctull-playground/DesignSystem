@@ -35,5 +35,6 @@ struct Components: View {
                 Image(systemName: "chevron.right")
             }
         }
+        .rowStyle(.custom)
     }
 }
