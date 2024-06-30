@@ -11,6 +11,7 @@ struct CustomRowStyle: RowStyle {
         HStack(alignment: .primary) {
             configuration.leading
             configuration.content
+                .font(.headline)
             Spacer()
             configuration.trailing
         }
@@ -23,8 +24,11 @@ private struct RowDetailStyle: DetailStyle {
     func makeBody(configuration: Configuration) -> some View {
         VStack(alignment: .leading) {
             configuration.primary
+                .font(.headline)
             configuration.secondary
+                .font(.subheadline)
             configuration.tertiary
+                .font(.caption)
         }
     }
 }
