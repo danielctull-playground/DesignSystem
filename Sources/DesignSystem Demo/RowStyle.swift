@@ -8,13 +8,14 @@ extension RowStyle where Self == CustomRowStyle {
 struct CustomRowStyle: RowStyle {
 
     func makeBody(configuration: Configuration) -> some View {
-        HStack(alignment: .primary) {
+        HStack(alignment: .primary, spacing: 8) {
             configuration.leading
             configuration.content
                 .font(.headline)
             Spacer()
             configuration.trailing
         }
+        .padding(8)
         .detailStyle(RowDetailStyle())
     }
 }
