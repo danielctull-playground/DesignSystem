@@ -19,10 +19,16 @@ public struct Detail<Primary: View, Secondary: View, Tertiary: View>: View {
     }
 
     public var body: some View {
-        let configuration = DetailStyleConfiguration(
-            primary: primary,
-            secondary: secondary,
-            tertiary: tertiary)
+        let configuration = DetailStyleConfiguration {
+            primary
+                .alignmentGuide(.primary) { $0[VerticalAlignment.center] }
+        } secondary: {
+            secondary
+                .alignmentGuide(.secondary) { $0[VerticalAlignment.center] }
+        } tertiary: {
+            tertiary
+                .alignmentGuide(.tertiary) { $0[VerticalAlignment.center] }
+        }
         AnyView(style.resolve(configuration: configuration))
     }
 }
@@ -37,6 +43,38 @@ extension Detail {
             primary: primary,
             secondary: secondary,
             tertiary: EmptyView.init)
+    }
+}
+
+// MARK: - Alignment Guides
+
+extension VerticalAlignment {
+    
+    /// Vertical alignment guide for the primary content of a ``Detail`` view.
+    public static let primary = VerticalAlignment(Primary.self)
+
+    /// Vertical alignment guide for the secondary content of a ``Detail`` view.
+    public static let secondary = VerticalAlignment(Secondary.self)
+
+    /// Vertical alignment guide for the tertiary content of a ``Detail`` view.
+    public static let tertiary = VerticalAlignment(Tertiary.self)
+
+    private struct Primary: AlignmentID {
+        static func defaultValue(in context: ViewDimensions) -> CGFloat {
+            context[VerticalAlignment.center]
+        }
+    }
+
+    private struct Secondary: AlignmentID {
+        static func defaultValue(in context: ViewDimensions) -> CGFloat {
+            context[VerticalAlignment.center]
+        }
+    }
+
+    private struct Tertiary: AlignmentID {
+        static func defaultValue(in context: ViewDimensions) -> CGFloat {
+            context[VerticalAlignment.center]
+        }
     }
 }
 
@@ -113,13 +151,13 @@ public struct DetailStyleConfiguration {
     public let tertiary: Tertiary
 
     fileprivate init(
-        primary: some View,
-        secondary: some View,
-        tertiary: some View
+        @ViewBuilder primary: () -> some View,
+        @ViewBuilder secondary: () -> some View,
+        @ViewBuilder tertiary: () -> some View
     ) {
-        self.primary = Primary(base: AnyView(primary))
-        self.secondary = Secondary(base: AnyView(secondary))
-        self.tertiary = Tertiary(base: AnyView(tertiary))
+        self.primary = Primary(base: AnyView(primary()))
+        self.secondary = Secondary(base: AnyView(secondary()))
+        self.tertiary = Tertiary(base: AnyView(tertiary()))
     }
 }
 
