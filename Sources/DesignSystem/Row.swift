@@ -29,6 +29,39 @@ public struct Row<Content: View, Leading: View, Trailing: View>: View {
 
 extension Row {
 
+    public init(
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder leading: () -> Leading
+    ) where Trailing == EmptyView {
+        self.init(
+            content: content,
+            leading: leading,
+            trailing: EmptyView.init)
+    }
+
+    public init(
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder trailing: () -> Trailing
+    ) where Leading == EmptyView {
+        self.init(
+            content: content,
+            leading: EmptyView.init,
+            trailing: trailing)
+    }
+
+    public init(
+        @ViewBuilder content: () -> Content
+    ) where Leading == EmptyView, Trailing == EmptyView {
+        self.init(
+            content: content,
+            leading: EmptyView.init,
+            trailing: EmptyView.init)
+    }
+
+}
+
+extension Row {
+
     public init<Primary, Secondary>(
         @ViewBuilder primary: () -> Primary,
         @ViewBuilder secondary: () -> Secondary,
@@ -46,6 +79,41 @@ extension Row {
         } trailing: {
             trailing()
         }
+    }
+
+    public init<Primary, Secondary>(
+        @ViewBuilder primary: () -> Primary,
+        @ViewBuilder secondary: () -> Secondary,
+        @ViewBuilder leading: () -> Leading
+    ) where Content == Detail<Primary, Secondary, EmptyView>, Trailing == EmptyView {
+        self.init(
+            primary: primary,
+            secondary: secondary,
+            leading: leading,
+            trailing: EmptyView.init)
+    }
+
+    public init<Primary, Secondary>(
+        @ViewBuilder primary: () -> Primary,
+        @ViewBuilder secondary: () -> Secondary,
+        @ViewBuilder trailing: () -> Trailing
+    ) where Content == Detail<Primary, Secondary, EmptyView>, Leading == EmptyView {
+        self.init(
+            primary: primary,
+            secondary: secondary,
+            leading: EmptyView.init,
+            trailing: trailing)
+    }
+
+    public init<Primary, Secondary>(
+        @ViewBuilder primary: () -> Primary,
+        @ViewBuilder secondary: () -> Secondary
+    ) where Content == Detail<Primary, Secondary, EmptyView>, Leading == EmptyView, Trailing == EmptyView {
+        self.init(
+            primary: primary,
+            secondary: secondary,
+            leading: EmptyView.init,
+            trailing: EmptyView.init)
     }
 }
 
