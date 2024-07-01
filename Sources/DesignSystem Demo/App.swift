@@ -1,4 +1,5 @@
 import DesignSystem
+import DesignSystemStyle
 import SwiftUI
 
 @main

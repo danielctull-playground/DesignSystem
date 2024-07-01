@@ -14,14 +14,24 @@ let package = Package(
     ],
     products: [
         .library(name: "DesignSystem", targets: ["DesignSystem"]),
+        .library(name: "DesignSystemStyle", targets: ["DesignSystemStyle"]),
     ],
     targets: [
+
         .target(name: "DesignSystem"),
+
+        .target(
+            name: "DesignSystemStyle",
+            dependencies: [
+                "DesignSystem",
+            ]
+        ),
 
         .executableTarget(
             name: "DesignSystem Demo",
             dependencies: [
-                "DesignSystem"
+                "DesignSystem",
+                "DesignSystemStyle",
             ]
         ),
     ]
