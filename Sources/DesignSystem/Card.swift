@@ -31,6 +31,88 @@ public struct Card<Content: View, Title: View, Media: View, Accessory: View>: Vi
     }
 }
 
+extension Card {
+
+    public init(
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder media: () -> Media,
+        @ViewBuilder accessory: () -> Accessory
+    ) where Title == EmptyView {
+        self.init(
+            content: content,
+            title: EmptyView.init,
+            media: media,
+            accessory: accessory)
+    }
+
+    public init(
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder title: () -> Title,
+        @ViewBuilder accessory: () -> Accessory
+    ) where Media == EmptyView {
+        self.init(
+            content: content,
+            title: title,
+            media: EmptyView.init,
+            accessory: accessory)
+    }
+
+    public init(
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder title: () -> Title,
+        @ViewBuilder media: () -> Media
+    ) where Accessory == EmptyView {
+        self.init(
+            content: content,
+            title: title,
+            media: media,
+            accessory: EmptyView.init)
+    }
+
+    public init(
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder title: () -> Title
+    ) where Media == EmptyView, Accessory == EmptyView {
+        self.init(
+            content: content,
+            title: title,
+            media: EmptyView.init,
+            accessory: EmptyView.init)
+    }
+
+    public init(
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder media: () -> Media
+    ) where Title == EmptyView, Accessory == EmptyView {
+        self.init(
+            content: content,
+            title: EmptyView.init,
+            media: media,
+            accessory: EmptyView.init)
+    }
+
+    public init(
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder accessory: () -> Accessory
+    ) where Title == EmptyView, Media == EmptyView {
+        self.init(
+            content: content,
+            title: EmptyView.init,
+            media: EmptyView.init,
+            accessory: accessory)
+    }
+
+    public init(
+        @ViewBuilder content: () -> Content
+    ) where Title == EmptyView, Media == EmptyView, Accessory == EmptyView {
+        self.init(
+            content: content,
+            title: EmptyView.init,
+            media: EmptyView.init,
+            accessory: EmptyView.init)
+    }
+}
+
 // MARK: - Style
 
 public protocol CardStyle: DynamicProperty {
