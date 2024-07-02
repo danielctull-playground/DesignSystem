@@ -10,13 +10,18 @@ public struct CustomRowStyle: RowStyle {
     public func makeBody(configuration: Configuration) -> some View {
         HStack(alignment: .primary, spacing: 8) {
             configuration.leading
+                .background(.purple)
             configuration.content
                 .font(.headline)
-            Spacer()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(.orange)
             configuration.trailing
+                .background(.pink)
         }
-        .padding(8)
+//        .padding(.vertical, 8)
         .detailStyle(RowDetailStyle())
+        .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 8, trailing: 0))
+        .listRowBackground(Color.gray)
     }
 }
 
@@ -26,10 +31,16 @@ private struct RowDetailStyle: DetailStyle {
         VStack(alignment: .leading, spacing: 4) {
             configuration.primary
                 .font(.headline)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(.yellow)
             configuration.secondary
                 .font(.subheadline)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(.blue)
             configuration.tertiary
                 .font(.caption)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(.red)
         }
     }
 }
@@ -86,6 +97,21 @@ private struct RowDetailStyle: DetailStyle {
             Text("Title")
         } secondary: {
             Text("Subtitle")
+        } leading: {
+            Image(systemName: "info.circle")
+        } trailing: {
+            Image(systemName: "chevron.right")
+        }
+
+        Row {
+            Detail {
+                Text("Title")
+            } secondary: {
+                Text("Subtitle")
+            } tertiary: {
+                Text("More 1")
+                Text("More 2")
+            }
         } leading: {
             Image(systemName: "info.circle")
         } trailing: {
