@@ -11,10 +11,16 @@ public struct StandardButtonStyle: ButtonStyle {
     configuration.label
       .padding()
       .bold()
-      .background(.action)
+      .background(.action.background)
       .cornerRadius(8)
-      .foregroundStyle(.white)
+      .foregroundStyle(.action)
   }
+}
+
+extension Action {
+  static let red = Action(foreground: .white, background: .red)
+  static let blue = Action(foreground: .white, background: .blue)
+  static let inverse = Action(foreground: .blue, background: .white)
 }
 
 #Preview("ButtonStyle") {
@@ -25,6 +31,9 @@ public struct StandardButtonStyle: ButtonStyle {
 
     Button("Blue Button") {}
       .actionStyle(.blue)
+
+    Button("Inverse Button") {}
+      .actionStyle(.inverse)
   }
   .buttonStyle(.standard)
   .frame(width: 400, height: 500)
