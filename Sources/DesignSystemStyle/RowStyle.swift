@@ -33,6 +33,7 @@ private struct RowDetailStyle: DetailStyle {
                 .font(.headline)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(.yellow)
+                .foregroundStyle(.main)
             configuration.secondary
                 .font(.subheadline)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -120,4 +121,5 @@ private struct RowDetailStyle: DetailStyle {
     }
     .frame(width: 320, height: 500)
     .rowStyle(.custom)
+    .mainColor(.purple)
 }
